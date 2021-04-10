@@ -1,6 +1,8 @@
 const express = require('express'); //state that we are using express (don't need file path because it's in the node_modules folder)
 const morgan = require('morgan'); //bring in Morgan middleware under variable "morgan"
 const campsiteRouter = require('./routes/campsiteRouter');
+const promotionRouter = require('./routes/promotionRouter');
+const partnerRouter = require('./routes/partnerRouter');
 
 const hostname = 'localhost';
 const port = 3000;
@@ -10,6 +12,8 @@ app.use(morgan('dev')); //"use" method, instead of writing the callback function
 app.use(express.json()); //when the server receives requests with JSON formatted data in the body, this middle ware funciton will handle parsing the JSON data into JS properties of the request object so the data can be used in JS.
 
 app.use('/campsites', campsiteRouter); //Provide the root path for the "campsiteRouter" here, which is why it doesn't need specified in "campsiteRouter.js"
+app.use('/promotions', promotionRouter);
+app.use('/partners', partnerRouter);
 
 app.use(express.static(__dirname + '/public')); //Set up express to serve files from the public folder. Pass the "use" function the middleware function "express.static" and give it an argument "__dirname + '/public'".  "__dirname" is a special variable in Node, whenever used, it will refer to the absolue path of the current directory that the file is in
 
